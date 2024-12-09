@@ -1,0 +1,18 @@
+env/
+code/0_initial dataset.ipynb
+code/1_adding_features_new.ipynb
+code/1_adding_features.ipynb
+code/catboost_info
+code/First CatBoost cross_validation.ipynb
+code/First CatBoost standartise.ipynb
+code/First CatBoost_5_features_log_stand.ipynb
+code/First CatBoost_5_features_log.ipynb
+code/First CatBoost_6_features_log.ipynb
+code/First CatBoost_6_features.ipynb
+code/First CatBoost_all_features.ipynb
+code/First CatBoost.ipynb
+code/ML_part.py
+code/First CatBoost_Pool_5_features_log.ipynb
+input_data/cities.csv
+input_data/no_outliers_dataset.csv
+catboost_info
