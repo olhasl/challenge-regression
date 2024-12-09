@@ -1,4 +1,8 @@
-# Input Data for the Model
+# Brief presentation of the model
+
+---
+
+## Input Data for the Model
 
 The model used data that was previously collected from the website [Immoweb](https://www.immoweb.be/en).
 
@@ -37,11 +41,15 @@ A new column, **Add_Features**, was created from boolean columns ("Fully Equippe
 
 The final dataset included **9,636 objects** characterized by **15 features**.
 
+![alt text](output_data/image.png)
+
 ---
 
 ## Determining the Impact of Indicators Using Correlation
 
 The correlation coefficient between each feature and the **price** was calculated. Categorical features were converted to numerical values by determining the average price for each category. Features with an absolute correlation coefficient above **0.3** were retained, while highly correlated features were excluded.
+
+![alt text](output_data/image-1.png)
 
 ### Selected Indicators
 The model used these 5 features:
@@ -59,8 +67,8 @@ The model leveraged **CatBoostRegressor**, a tree-based regression algorithm opt
 
 ### Key Characteristics of CatBoost:
 - **Tree-Based Architecture:**
-  - Gradient Boosting (sequential learning, reducing residual errors).
-  - Scale Invariance (not sensitive to feature scaling).
+- **Gradient Boosting** (sequential learning, reducing residual errors).
+- **Scale Invariance** (not sensitive to feature scaling).
 - **Native Categorical Feature Handling:** Eliminates the need for manual encoding.
 
 The target variable, **Price**, was logarithmized to reduce the influence of extreme values, stabilize the model, and approximate a normal distribution. No standardization was needed as tree-based models are invariant to scaling.
@@ -76,6 +84,10 @@ The target variable, **Price**, was logarithmized to reduce the influence of ext
 ---
 
 ## Model Evaluation
+
+After training the model and testing it on a test set with transformed and original data, the main metrics of model quality and accuracy were calculated.
+
+![alt text](output_data/image-2.png)
 
 ### Performance on Transformed Data:
 - **Train Set:**
@@ -100,17 +112,21 @@ The target variable, **Price**, was logarithmized to reduce the influence of ext
 Using **Feature Importance** and **SHAP Analysis**, the most significant contributors to price were:
 1. **Livable Space (m²)**: Largest influence.
 2. **Avg_Taxable_Income**: Moderate influence.
-3. **Subtype of Property_Grouped**: Smallest impact.
+The smallest influence is the property type group.
+
+![alt text](output_data/image-3.png)
 
 Higher values of **living space size** and **average income** increased property prices, while lower values had the opposite effect.
+
+![alt text](output_data/shap_summary_plot.png)
 
 ---
 
 ## Conclusion
 
-- **Better Performance on Log-Transformed Data:** Reduced effect of extreme values, resulting in improved metrics.
-- **Challenges on the Original Scale:** Difficulty handling skewed distributions and large ranges.
-- **Generalization Gap:** Slight overfitting observed; regularization or cross-validation might mitigate this issue.
+- **Better Performance on Log-Transformed Data:** The log transformation reduces the effect of extreme values, allowing the model to perform more accurately. Evaluating Metrics are consistently better in this space.
+- **Challenges on the Original Scale:** The model struggles to handle the wide range and skewed distribution of the original data. High RMSE and MAE indicate difficulty predicting very large prices.
+- **Generalization Gap:** Slightly lower performance on test data compared to training data suggests some level of overfitting. This might be mitigated by regularization or enhanced cross-validation.
 
 ### Execution Time
 The training code execution took approximately **50 seconds**.
